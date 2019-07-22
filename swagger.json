@@ -1,0 +1,184 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a API Rides for locate position ",
+    "version": "1.0.0",
+    "title": "Rides by Xendit",
+    "termsOfService": "https://www.xendit.co",
+    "contact": {
+      "email": "randiapr27@gmail.com"
+    },
+    "license": {
+      "name": "Xendit License",
+      "url": "https://www.xendit.co"
+    }
+  },
+  "host": "localhost:8010",
+  "tags": [
+    {
+      "name": "rides",
+      "description": "Everything about Rides API"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/rides": {
+      "get": {
+        "tags": [
+          "rides"
+        ],
+        "summary": "Get All Rides",
+        "description": "",
+        "operationId": "getRides",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Succeed"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "rides"
+        ],
+        "summary": "Add a new rides",
+        "description": "",
+        "operationId": "addRides",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Rides object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rides"
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Succeed"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/rides/{id}": {
+      "get": {
+        "tags": [
+          "rides"
+        ],
+        "summary": "Find rides by ID",
+        "description": "Returns a single rides",
+        "operationId": "getRidesById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of rides to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Rides"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Rides not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Rides": {
+      "type": "object",
+      "required": [
+        "start_lat",
+        "start_long",
+        "end_lat",
+        "end_long",
+        "rider_name",
+        "driver_name",
+        "driver_vehicle"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "start_lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "start_long": {
+          "type": "number",
+          "format": "float"
+        },
+        "end_lat": {
+          "type": "number",
+          "format": "float"
+        },
+        "end_long": {
+          "type": "number",
+          "format": "float"
+        },
+        "rider_name": {
+          "type": "string"
+        },
+        "driver_name": {
+          "type": "string"
+        },
+        "driver_vehicle": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
